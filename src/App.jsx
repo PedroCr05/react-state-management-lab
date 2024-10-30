@@ -1,12 +1,11 @@
 import { useState } from "react";
-import GameInformation from "./components/GameInformation/components";
+import ZombieFighters from "./components/ZombieFighters/ZombieFighters.jsx";
 import "./App.css";
 
 const App = () => {
   const team = [];
   const money = 100;
-
-  const [gameInformation, setGameInformation] = useState([
+  const zombieFighters = [
     {
       name: "Survivor",
       price: 12,
@@ -77,13 +76,17 @@ const App = () => {
       agility: 6,
       img: "https://via.placeholder.com/150/602b9e",
     },
-  ]);
+  ];
+
   return (
     <>
       <main>
-        {gameInformation.map((information, idx) => {
-          <GameInformation key={idx} information={information} />;
-        })}
+        <ul>
+          <h2>{money}</h2>
+          {zombieFighters.map((character, idx) => {
+            <ZombieFighters key={idx} character={character} />;
+          })}
+        </ul>
       </main>
     </>
   );
