@@ -2,10 +2,11 @@ import { useState } from "react";
 import ZombieFighters from "./components/ZombieFighters/ZombieFighters.jsx";
 import "./App.css";
 
+const team = [];
+const money = 100;
+
 const App = () => {
-  const team = [];
-  const money = 100;
-  const zombieFighters = [
+  const zombieFightersList = [
     {
       name: "Survivor",
       price: 12,
@@ -80,12 +81,21 @@ const App = () => {
 
   return (
     <>
+      <header>
+        <h1>Zombie Fighters</h1>
+      </header>
+      <h2>{money}</h2>
       <main>
+        <h3>{team}</h3>
         <ul>
-          <h2>{money}</h2>
-          {zombieFighters.map((character, idx) => {
-            <ZombieFighters key={idx} character={character} />;
-          })}
+          {zombieFightersList.map((character, idx) => (
+            <ZombieFighters
+              key={idx}
+              character={character}
+              money={money}
+              team={team}
+            />
+          ))}
         </ul>
       </main>
     </>
