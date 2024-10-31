@@ -1,4 +1,4 @@
-const ZombieFightersStats = ({ character }) => {
+const ZombieFightersStatsEdited = ({ character }) => {
   return (
     <>
       <h3>Price: ${character.price}</h3>
@@ -8,4 +8,4 @@ const ZombieFightersStats = ({ character }) => {
   );
 };
 
-export default ZombieFightersStats;
+export default ZombieFightersStatsEdited;
