@@ -4,12 +4,12 @@ import ZombieFightersEdited from "./components/ZombieFighterEdited/ZombieFighter
 import "./App.css";
 
 const App = () => {
-  // ----getter
+  // getter
   const [team, setTeam] = useState([]);
   const [money, setMoney] = useState(100);
   const [totalStrength, setTotalStrength] = useState(0);
   const [totalAgility, setTotalAgility] = useState(0);
-  // ----------------------setter
+  // setter
   const [zombieFightersList, setZombieFightersList] = useState([
     {
       name: "Survivor",
@@ -92,6 +92,10 @@ const App = () => {
     setTotalAgility(character + totalAgility);
   };
 
+  const updateStats = (character) => {
+    // Here is where you combine both
+  };
+
   const handleAddCharacter = (character) => {
     money < character.price
       ? console.log("Not enough money!")
@@ -104,15 +108,16 @@ const App = () => {
     handleTotalAgility(character.agility);
   };
 
-  const handleRemoveCharacter = (characterToRemove) => {
-    setTeam((prevTeam) => {
-      const newTeam = prevTeam.filter(
-        (character) => character !== characterToRemove
-      );
-      updateTotals();
-      return newTeam;
-    });
-    setMoney((prevMoney) => prevMoney + characterToRemove.price);
+  const handleRemoveCharacter = (character) => {
+    const updatedTeam = team.filter(
+      (teamMember) => teamMember.name !== character.name
+    );
+    setTeam(updatedTeam);
+    setMoney(money + character.price);
+    const updatedStrength = totalStrength - character.strength;
+    const updatedAgility = totalAgility - character.agility;
+    setTotalStrength(updatedStrength);
+    setTotalAgility(updatedAgility);
   };
 
   return (
@@ -125,6 +130,7 @@ const App = () => {
       <h2>Team Agility: {totalAgility}</h2>
       <main>
         <h3>Team</h3>
+
         <ul>
           {team.length > 0 ? (
             team.map((character, idx) => (
@@ -139,11 +145,11 @@ const App = () => {
             <p>Pick some team members!</p>
           )}
         </ul>
-        <h3>Available Fighters</h3>
         <ul>
           {zombieFightersList.map((character, idx) => (
             <li key={idx}>
               <ZombieFighters key={idx} character={character} />
+
               <button onClick={() => handleAddCharacter(character)}>Add</button>
             </li>
           ))}
@@ -154,4 +160,3 @@ const App = () => {
 };
 
 export default App;
-``;
